@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+{% block content %}
+
+<h2>Featured Posts</h2>
+<hr>
+{% for object in object_list %}
+<div class="row">
+    <div class="col-md-6 col-12 mt-5 mb-5">
+        <h3 class="fw-bold">{{ object.title }} </h3>
+        <p class = "text-muted"> {{ object.date }} </p>
+        <p class="text-muted">Posted by {{ object.author.username }} </p>
+        {% if object.likes.count == 1 %}
+            <p class="text-muted"> {{ object.likes.count }} person likes this post </p>
+        {% else %}
+            <p class="text-muted"> {{ object.likes.count }} people like this post </p>
+        {% endif %}
+        <div class="my-3">
+            {{ object.content|truncatewords_html:50|safe }}
+        </div>
+
+        <a href="{% url 'detail_article' object.id %}">Read more</a>
+    </div>
+</div>
+{% endfor %}
+
+<div>
+    <ul class="pagination">
+        <div class="mx-auto d-flex flex-row mt-5">
+            {% if page_obj.has_previous %}
+            <li class="page-item">
+                <a class="page-link" href="?page=1">&laquo; 1 </a>
+            </li>
+            {% endif %}
+
+            {% if page_obj.has_previous %}
+            <li class="page-item">
+                <a class="page-link" href="?page={{ page_obj.previous_page_number}}"> Previous </a>
+            </li>
+            {% endif %}
+
+            <li class="page-item">
+                <a class="page-link" href="#">Page {{ page_obj.number}} of {{ page_obj.paginator.num_pages }}</a>
+            </li>
+
+            {% if page_obj.has_next %}
+            <li class="page-item">
+                <a class="page-link" href="?page={{ page_obj.next_page_number }}"> Next </a>
+            </li>
+            {% endif %}
+
+            {% if page_obj.has_next %}
+            <li class="page-item">
+                <a class="page-link" href="?page={{ page_obj.paginator.num_pages }}">{{ page_obj.paginator.num_pages }} &raquo; </a>
+            </li>
+            {% endif %}
+        </div>
+    </ul>
+</div>
+
+{% endblock content %}

@@ -1,0 +1,23 @@
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Register</title>
+</head>
+<body>
+<main>
+    <main>
+        {% extends "base.html" %} 
+        {% block content %}
+        <h1 align = "center">Register</h1>
+        <form method="Post">
+            {% csrf_token %}
+            {{form}}
+            <button class = "btn-secondary" type="submit">Sign Up </button>
+        </form>
+        <small>Already have an account? <a href = "{% url 'login' %}"> Login </a></small>
+        {% endblock content %}
+      </main>
+<main>
+</body>
+</html>

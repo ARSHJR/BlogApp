@@ -1,0 +1,30 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Home</title>
+  </head>
+  <body>
+    <main>
+      <bar>
+        <left>
+          <h1>
+            <a href = "{% url "index" %}" className = "logo">BlogHaven &emsp;</a>
+          </h1>
+        </left>
+        <right>
+            <a href="{% url 'featured' %}">Featured </a>
+            {% if request.user.is_authenticated %}
+            <a href = "http://127.0.0.1:8000/admin/blog/article/add/">Create New Post</a>
+            <a href = "{% url "logout" %}">Logout</a>
+
+            {% else %}
+            <a href = "{% url "login" %}">Login</a>
+            <a href = "{% url "register" %}">Register</a>
+
+            {% endif %}
+        </right>
+      </bar>
+    <main>
+  </body>
+</html>
